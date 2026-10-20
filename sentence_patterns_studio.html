@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Sentence Patterns Interactive Studio</title>
+    
+    <!-- PWA & Mobile Web App Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Sentence Patterns">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#4f46e5">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+        .touch-target {
+            min-height: 44px;
+            min-width: 44px;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            height: 4px;
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        @keyframes popIn {
+            0% { transform: scale(0.97); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .animate-pop {
+            animation: popIn 0.25s ease-out forwards;
+        }
+        .word-chip {
+            display: inline-block;
+            padding: 2px 6px;
+            margin: 2px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .word-chip.selected {
+            background-color: #6366f1;
+            color: white;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col pb-24 md:pb-8">
+
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
+        <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-violet-500 flex items-center justify-center text-white font-black text-xl shadow-md">
+                    S
+                </div>
+                <div>
+                    <h1 class="text-xl font-extrabold text-slate-900 leading-tight">Sentence Patterns</h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="hidden md:block border-t border-slate-100 bg-slate-50/50">
+            <div class="max-w-5xl mx-auto px-4 flex space-x-2 py-2">
+                <button onclick="switchTab('relative')" id="desk-tab-relative" class="nav-tab text-sm font-semibold px-4 py-2 rounded-lg transition-all flex items-center space-x-2">
+                    <span>1. Relative Clauses</span>
+                    <span id="badge-relative" class="text-xs px-1.5 py-0.5 rounded-full bg-slate-200 text-slate-600">0/3</span>
+                </button>
+                <button onclick="switchTab('participle')" id="desk-tab-participle" class="nav-tab text-sm font-semibold px-4 py-2 rounded-lg transition-all flex items-center space-x-2">
+                    <span>2. Participle Clauses</span>
+                    <span id="badge-participle" class="text-xs px-1.5 py-0.5 rounded-full bg-slate-200 text-slate-600">0/3</span>
+                </button>
+                <button onclick="switchTab('noun')" id="desk-tab-noun" class="nav-tab text-sm font-semibold px-4 py-2 rounded-lg transition-all flex items-center space-x-2">
+                    <span>3. Noun Clauses</span>
+                    <span id="badge-noun" class="text-xs px-1.5 py-0.5 rounded-full bg-slate-200 text-slate-600">0/3</span>
+                </button>
+                <button onclick="switchTab('review')" id="desk-tab-review" class="nav-tab text-sm font-semibold px-4 py-2 rounded-lg transition-all flex items-center space-x-2">
+                    <span>⚡ Final Challenge</span>
+                    <span id="badge-review" class="text-xs px-1.5 py-0.5 rounded-full bg-slate-200 text-slate-600">0/10</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="max-w-5xl mx-auto px-4 pt-6 flex-grow w-full">
+
+        <!-- ========================================== -->
+        <!-- TAB 1: RELATIVE CLAUSES SECTION           -->
+        <!-- ========================================== -->
+        <section id="section-relative" class="tab-content space-y-6 animate-pop">
+            <div class="bg-gradient-to-r from-indigo-600 to-indigo-800 rounded-2xl p-6 text-white shadow-lg">
+                <div class="flex items-center space-x-2 text-indigo-200 text-xs font-bold tracking-wider uppercase mb-1">
+                    <span>Unit 01</span> • <span>Grammar Focus</span>
+                </div>
+                <h2 class="text-2xl sm:text-3xl font-extrabold mb-2">Relative Clauses</h2>
+                <p class="text-indigo-100 text-sm sm:text-base max-w-2xl leading-relaxed">
+                    Relative clauses add essential or extra information about a noun without starting a completely new sentence. They help make your academic writing flow smoothly and sound more sophisticated.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-white rounded-xl p-5 border border-slate-200 shadow-sm">
+                    <h3 class="text-base font-bold text-indigo-900 mb-3 flex items-center">
+                        <svg class="w-5 h-5 mr-2 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        Quick Overview
+                    </h3>
+                    <p class="text-sm text-slate-600 leading-relaxed mb-3">
+                        A relative clause connects two ideas by describing a person, thing, place, or time using relative pronouns like <strong>who, which, that, whose, where,</strong> or <strong>when</strong>.
+                    </p>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Mastering relative clauses helps you combine short, repetitive sentences into polished complex sentences in your essays.
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-xl p-5 border border-slate-200 shadow-sm">
+                    <h3 class="text-base font-bold text-indigo-900 mb-3 flex items-center">
+                        <svg class="w-5 h-5 mr-2 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        Key Rules to Remember
+                    </h3>
+                    <ul class="text-xs sm:text-sm text-slate-600 space-y-2">
+                        <li class="flex items-start">
+                            <span class="inline-block w-2 h-2 rounded-full bg-indigo-500 mt-1.5 mr-2 shrink-0"></span>
+                            <span><strong>Defining:</strong> Essential info; NO commas; can use <em>that</em>.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="inline-block w-2 h-2 rounded-full bg-indigo-500 mt-1.5 mr-2 shrink-0"></span>
+                            <span><strong>Non-Defining:</strong> Extra info; MUST use commas; CANNOT use <em>that</em>.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="inline-block w-2 h-2 rounded-full bg-indigo-500 mt-1.5 mr-2 shrink-0"></span>
+                            <span><strong>Omission Rule:</strong> You can drop <em>who/which/that</em> ONLY when it acts as the <strong>object</strong> of the clause (e.g., <em>The book (that) I read</em>).</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="inline-block w-2 h-2 rounded-full bg-indigo-500 mt-1.5 mr-2 shrink-0"></span>
+                            <span><strong>Using "Where" (Places):</strong> <em>Where</em> refers to a place and MUST be followed by a <strong>complete sentence (Subject + Verb)</strong> (e.g., <em>The school <u>where I studied</u></em>). If the clause lacks a subject and starts directly with a verb, use <em>which</em> (e.g., <em>The school <u>which is</u> nearby</em>).</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Flagged Advanced Use Section -->
+            <div class="bg-indigo-50 border-2 border-indigo-300 rounded-xl p-4 shadow-sm space-y-2">
+                <div class="flex items-center space-x-2 text-xs font-bold text-indigo-900 uppercase tracking-wide">
+                    <span class="bg-indigo-600 text-white px-2 py-0.5 rounded text-[10px] font-black">ADVANCED USE</span>
+                    <span>Academic Focus: Preposition + Relative Pronoun</span>
+                </div>
+                <p class="text-xs sm:text-sm text-indigo-950 leading-relaxed">
+                    In formal writing and academic essays, prepositions are placed directly before <strong>which</strong> or <strong>whom</strong> rather than dangling at the end of the sentence:
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs pt-1">
+                    <div class="bg-white p-2.5 rounded-lg border border-indigo-100">
+                        <span class="text-slate-400 block font-medium">Everyday / Spoken:</span>
+                        The topic that we were talking <strong>about</strong>...
+                    </div>
+                    <div class="bg-indigo-100/70 p-2.5 rounded-lg border border-indigo-200 text-indigo-950 font-medium">
+                        <span class="text-indigo-700 block font-bold text-[11px]">Formal / Advanced:</span>
+                        The topic <strong>about which</strong> we were talking...
+                    </div>
+                    <div class="bg-white p-2.5 rounded-lg border border-indigo-100">
+                        <span class="text-slate-400 block font-medium">Everyday / Spoken:</span>
+                        The tools that he conducted experiments <strong>with</strong>...
+                    </div>
+                    <div class="bg-indigo-100/70 p-2.5 rounded-lg border border-indigo-200 text-indigo-950 font-medium">
+                        <span class="text-indigo-700 block font-bold text-[11px]">Formal / Advanced:</span>
+                        The tools <strong>with which</strong> he conducted experiments...
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl p-5 border border-slate-200 shadow-sm">
+                <h3 class="text-base font-bold text-slate-900 mb-3">Sentence Showcase</h3>
+                <div class="space-y-3">
+                    <div class="p-3 bg-slate-50 rounded-lg border border-slate-100 text-sm">
+                        <span class="font-semibold text-xs text-indigo-600 block uppercase mb-1">1. Defining (Essential)</span>
+                        The student <span class="bg-indigo-100 text-indigo-900 px-1.5 py-0.5 rounded font-medium border border-indigo-200">who won the debate scholarship</span> spoke at the assembly.
+                    </div>
+                    <div class="p-3 bg-slate-50 rounded-lg border border-slate-100 text-sm">
+                        <span class="font-semibold text-xs text-indigo-600 block uppercase mb-1">2. Non-Defining (Extra info with commas)</span>
+                        My laptop<span class="bg-indigo-100 text-indigo-900 px-1.5 py-0.5 rounded font-medium border border-indigo-200">, which I bought last month,</span> runs all high-end graphics apps.
+                    </div>
+                    <div class="p-3 bg-slate-50 rounded-lg border border-slate-100 text-sm">
+                        <span class="font-semibold text-xs text-indigo-600 block uppercase mb-1">3. Pronoun Omitted (Object Position)</span>
+                        The podcast <span class="bg-indigo-100 text-indigo-900 px-1.5 py-0.5 rounded font-medium border border-indigo-200">(that) we listened to yesterday</span> was super inspiring.
+                    </div>
+                    <div class="p-3 bg-slate-50 rounded-lg border border-slate-100 text-sm">
+                        <span class="font-semibold text-xs text-indigo-600 block uppercase mb-1">4. Place with "Where" (Followed by complete sentence)</span>
+                        That is the laboratory <span class="bg-indigo-100 text-indigo-900 px-1.5 py-0.5 rounded font-medium border border-indigo-200">where the research team conducts experiments</span> <em class="text-xs text-indigo-700 font-normal">(Followed by complete sentence: 'the research team conducts experiments')</em>.
+                    </div>
+                    <div class="p-3 bg-indigo-50/60 rounded-lg border border-indigo-200 text-sm">
+                        <span class="font-bold text-xs text-indigo-700 block uppercase mb-1">5. 🌟 Advanced Use (Formal Prepositions)</span>
+                        This is the environment <span class="bg-indigo-200 text-indigo-950 px-1.5 py-0.5 rounded font-semibold border border-indigo-300">in which</span> endangered species thrive, and the cause <span class="bg-indigo-200 text-indigo-950 px-1.5 py-0.5 rounded font-semibold border border-indigo-300">for which</span> they raised funds.
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl p-5 border border-slate-200 shadow-sm space-y-6">
+                <div class="border-b border-slate-100 pb-3">
+                    <h3 class="text-base font-bold text-slate-900">Interactive Skill Builders</h3>
+                    <p class="text-xs text-slate-500">Practice identifying relative clauses, selecting pronouns, and combining sentences.</p>
+                </div>
+
+                <!-- Activity A: Tap-to-Highlight -->
+                <div class="space-y-3">
+                    <label class="block text-sm font-semibold text-slate-800">
+                        Activity A: Tap/Click words to highlight the complete relative clause in this sentence.
+                    </label>
+                    <div id="rel-highlight-box" class="p-3 bg-indigo-50/70 border border-indigo-100 rounded-lg text-sm leading-relaxed">
+                        <!-- Words injected via JS -->
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <button onclick="checkRelHighlight()" class="touch-target px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg text-sm transition">Check Highlight</button>
+                        <button onclick="resetRelHighlight()" class="touch-target px-3 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold rounded-lg text-sm transition">Reset</button>
+                    </div>
+                    <div id="rel-hl-feedback" class="hidden p-3 rounded-lg text-xs sm:text-sm font-medium"></div>
+                </div>
+
+                <!-- Activity B: Choose Pronoun -->
+                <div class="space-y-3 pt-3 border-t border-slate-100">
+                    <label class="block text-sm font-semibold text-slate-800">
+                        Activity B: Select the best relative pronoun to complete the sentence.
+                    </label>
+                    <p class="text-sm bg-slate-50 p-3 rounded-lg border border-slate-200">
+                        "The research team interviewed the doctor <span class="underline font-bold text-indigo-700">[ ? ]</span> discovered the new treatment."
+                    </p>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2" id="rel-act1-options">
+                        <button onclick="checkRelAct1('which', this)" class="touch-target px-4 py-2 bg-slate-100 hover:bg-slate-200 font-medium rounded-lg text-sm text-slate-700 transition">which</button>
+                        <button onclick="checkRelAct1('who', this)" class="touch-target px-4 py-2 bg-slate-100 hover:bg-slate-200 font-medium rounded-lg text-sm text-slate-700 transition">who</button>
+                        <button onclick="checkRelAct1('whose', this)" class="touch-target px-4 py-2 bg-slate-100 hover:bg-slate-200 font-medium rounded-lg text-sm text-slate-700 transition">whose</button>
+                        <button onclick="checkRelAct1('where', this)" class="touch-target px-4 py-2 bg-slate-100 hover:bg-slate-200 font-medium rounded-lg text-sm text-slate-700 transition">where</button>
+                    </div>
+                    <div id="rel-act1-feedback" class="hidden p-3 rounded-lg text-xs sm:text-sm font-medium"></div>
+                </div>
+
+                <!-- Activity C: Sentence Combiner -->
+                <div class="space-y-3 pt-3 border-t border-slate-100">
+                    <label class="block text-sm font-semibold text-slate-800">
+                        Activity C: Sentence Combiner — Pick the correct merged sentence.
+                    </label>
+                    <p class="text-xs text-slate-500 font-medium">Combine: <em>"I read a famous novel. It was published in 1925."</em></p>
+                    <div class="space-y-2" id="rel-act3-options">
+                        <button onclick="checkRelCombine(0, this)" class="touch-target w-full text-left p-3 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-lg text-xs sm:text-sm text-slate-700 transition">
+                            I read a famous novel, that was published in 1925.
+                        </button>
+                        <button onclick="checkRelCombine(1, this)" class="touch-target w-full text-left p-3 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-lg text-xs sm:text-sm text-slate-700 transition">
+                            I read a famous novel that was published in 1925.
+                        </button>
+                        <button onclick="checkRelCombine(2, this)" class="touch-target w-full text-left p-3 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-lg text-xs sm:text-sm text-slate-700 transition">
+                            I read a famous novel where it was published in 1925.
+                        </button>
+                    </div>
+                    <div id="rel-act3-feedback" class="hidden p-3 rounded-lg text-xs sm:text-sm font-medium"></div>
+                </div>
+            </div>
+
+            <div class="bg-indigo-900 text-white rounded-xl p-5 shadow-md">
+                <div class="flex justify-between items-center mb-4">
+                    <div>
+                        <span class="text-xs font-bold text-indigo-300 uppercase tracking-wide">Check Understanding</span>
+                        <h3 class="text-lg font-bold">Relative Clauses Quiz</h3>
+                    </div>
+                    <span id="quiz-relative-status" class="text-xs bg-indigo-800 text-indigo-200 px-2.5 py-1 rounded-full font-bold">3 Questions</span>
+                </div>
+                <div id="quiz-relative-container" class="space-y-4"></div>
+            </div>
+
+            <!-- Pro Tip Box -->
+            <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-xl flex items-start space-x-3">
+                <div class="text-amber-600 font-bold text-lg">💡</div>
+                <div class="text-xs sm:text-sm text-amber-900 leading-relaxed">
+                    <strong>Pro Exam Tip:</strong> Never use <em>"that"</em> in non-defining relative clauses (clauses inside commas). <br>
+                    ❌ <em>Incorrect:</em> Paris, that is famous for art, is beautiful.<br>
+                    ✅ <em>Correct:</em> Paris, which is famous for art, is beautiful.
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ========================================== -->
+        <!-- TAB 2: PARTICIPLE CLAUSES SECTION          -->
+        <!-- ========================================== -->
+        <section id="section-participle" class="tab-content hidden space-y-6 animate-pop">
+            <div class="bg-gradient-to-r from-emerald-600 to-teal-800 rounded-2xl p-6 text-white shadow-lg">
+                <div class="flex items-center space-x-2 text-emerald-200 text-xs font-bold tracking-wider uppercase mb-1">
+                    <span>Unit 02</span> • <span>Advanced Syntax</span>
+                </div>
+                <h2 class="text-2xl sm:text-3xl font-extrabold mb-2">Participle Clauses</h2>
+                <p class="text-emerald-100 text-sm sm:text-base max-w-2xl leading-relaxed">
+                    Participle clauses allow you to express information about condition, cause, time, or result in a concise way using <em>-ing</em>, <em>-ed</em>, or <em>having + past participle</em>.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-white rounded-xl p-5 border border-slate-200 shadow-sm">
+                    <h3 class="text-base font-bold text-emerald-900 mb-3 flex items-center">
+                        <svg class="w-5 h-5 mr-2 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        What are Participle Clauses?
+                    </h3>
+                    <p class="text-sm text-slate-600 leading-relaxed mb-3">
+                        They are shortened adverbial or relative clauses. They make prose punchy and are common in journalism and literature.
+                    </p>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        <strong>Golden Rule:</strong> The subject of the participle clause MUST be the exact same as the subject of the main clause!
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-xl p-5 border border-slate-200 shadow-sm">
+                    <h3 class="text-base font-bold text-emerald-900 mb-3 flex items-center">
+                        <svg class="w-5 h-5 mr-2 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 022 2h2a2 2 0 022-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
+                        Three Key Forms
+                    </h3>
+                    <ul class="text-xs sm:text-sm text-slate-600 space-y-2">
+                        <li class="flex items-start">
+                            <span class="inline-block w-2 h-2 rounded-full bg-emerald-500 mt-1.5 mr-2 shrink-0"></span>
+                            <span><strong>Present Participle (-ing):</strong> Active meaning happening simultaneously (e.g., <em>Feeling confident, she spoke up</em>).</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="inline-block w-2 h-2 rounded-full bg-emerald-500 mt-1.5 mr-2 shrink-0"></span>
+                            <span><strong>Past Participle (-ed/V3):</strong> Passive meaning (e.g., <em>Built in 1990, the bridge is sturdy</em>).</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="inline-block w-2 h-2 rounded-full bg-emerald-500 mt-1.5 mr-2 shrink-0"></span>
+                            <span><strong>Perfect Participle (Having + V3):</strong> Action completed earlier (e.g., <em>Having finished the essay, Liam slept</em>).</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl p-5 border border-slate-200 shadow-sm">
+                <h3 class="text-base font-bold text-slate-900 mb-3">Sentence Showcase</h3>
+                <div class="space-y-3">
+                    <div class="p-3 bg-slate-50 rounded-lg border border-slate-100 text-sm">
+                        <span class="font-semibold text-xs text-emerald-600 block uppercase mb-1">1. Active / Simultaneous (-ing)</span>
+                        <span class="bg-emerald-100 text-emerald-900 px-1.5 py-0.5 rounded font-medium border border-emerald-200">Walking into the laboratory</span>, the scientist noticed the reaction immediately.
+                    </div>
+                    <div class="p-3 bg-slate-50 rounded-lg border border-slate-100 text-sm">
+                        <span class="font-semibold text-xs text-emerald-600 block uppercase mb-1">2. Passive Meaning (-ed / V3)</span>
+                        <span class="bg-emerald-100 text-emerald-900 px-1.5 py-0.5 rounded font-medium border border-emerald-200">Surrounded by supportive friends</span>, Maya felt ready for the challenge.
+                    </div>
+                    <div class="p-3 bg-slate-50 rounded-lg border border-slate-100 text-sm">
+                        <span class="font-semibold text-xs text-emerald-600 block uppercase mb-1">3. Completed Prior Action (Having + V3)</span>
+                        <span class="bg-emerald-100 text-emerald-900 px-1.5 py-0.5 rounded font-medium border border-emerald-200">Having saved enough money from his internship</span>, Alex bought a new guitar.
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl p-5 border border-slate-200 shadow-sm space-y-6">
+                <div class="border-b border-slate-100 pb-3">
+                    <h3 class="text-base font-bold text-slate-900">Interactive Skill Builders</h3>
+                    <p class="text-xs text-slate-500">Practice reducing clauses, selecting participle forms, and identifying meanings.</p>
+                </div>
+
+                <!-- Activity A: Clause Reduction -->
+                <div class="space-y-3">
+                    <label class="block text-sm font-semibold text-slate-800">
+                        Activity A: Reduce the clause: "Because she was exhausted from practice, Sarah fell asleep on the bus."
+                    </label>
+                    <div class="space-y-2" id="part-act1-options">
+                        <button onclick="checkPartAct1(0, this)" class="touch-target w-full text-left p-3 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-lg text-xs sm:text-sm text-slate-700 transition">
+                            Exhausting from practice, Sarah fell asleep on the bus.
+                        </button>
+                        <button onclick="checkPartAct1(1, this)" class="touch-target w-full text-left p-3 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-lg text-xs sm:text-sm text-slate-700 transition">
+                            Exhausted from practice, Sarah fell asleep on the bus.
+                        </button>
+                        <button onclick="checkPartAct1(2, this)" class="touch-target w-full text-left p-3 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-lg text-xs sm:text-sm text-slate-700 transition">
+                            Having exhausting from practice, Sarah fell asleep on the bus.
+                        </button>
+                    </div>
+                    <div id="part-act1-feedback" class="hidden p-3 rounded-lg text-xs sm:text-sm font-medium"></div>
+                </div>
+
+                <!-- Activity B: Choose Form -->
+                <div class="space-y-3 pt-3 border-t border-slate-100">
+                    <label class="block text-sm font-semibold text-slate-800">
+                        Activity B: Select the correct participle form for prior completion.
+                    </label>
+                    <p class="text-sm bg-emerald-50/60 p-3 rounded-lg border border-emerald-100">
+                        "<span class="underline font-bold text-emerald-700">[ ? ]</span> all requirements, the applicant was scheduled for an interview."
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2" id="part-act2-options">
+                        <button onclick="checkPartAct2('completing', this)" class="touch-target p-2.5 bg-slate-100 hover:bg-slate-200 font-semibold rounded-lg text-xs sm:text-sm text-slate-700 transition">Completing</button>
+                        <button onclick="checkPartAct2('completed', this)" class="touch-target p-2.5 bg-slate-100 hover:bg-slate-200 font-semibold rounded-lg text-xs sm:text-sm text-slate-700 transition">Completed</button>
+                        <button onclick="checkPartAct2('having completed', this)" class="touch-target p-2.5 bg-slate-100 hover:bg-slate-200 font-semibold rounded-lg text-xs sm:text-sm text-slate-700 transition">Having completed</button>
+                    </div>
+                    <div id="part-act2-feedback" class="hidden p-3 rounded-lg text-xs sm:text-sm font-medium"></div>
+                </div>
+
+                <!-- Activity C: Meaning Identification -->
+                <div class="space-y-3 pt-3 border-t border-slate-100">
+                    <label class="block text-sm font-semibold text-slate-800">
+                        Activity C: What relationship does this participle clause express? <br>
+                        <em>"Not knowing the answer, David remained silent."</em>
+                    </label>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2" id="part-act3-options">
+                        <button onclick="checkPartMeaning('cause', this)" class="touch-target p-2.5 bg-slate-100 hover:bg-slate-200 font-semibold rounded-lg text-xs sm:text-sm text-slate-700 transition">Cause / Reason (Because)</button>
+                        <button onclick="checkPartMeaning('time', this)" class="touch-target p-2.5 bg-slate-100 hover:bg-slate-200 font-semibold rounded-lg text-xs sm:text-sm text-slate-700 transition">Time sequence (After)</button>
+                        <button onclick="checkPartMeaning('condition', this)" class="touch-target p-2.5 bg-slate-100 hover:bg-slate-200 font-semibold rounded-lg text-xs sm:text-sm text-slate-700 transition">Condition (If)</button>
+                    </div>
+                    <div id="part-act3-feedback" class="hidden p-3 rounded-lg text-xs sm:text-sm font-medium"></div>
+                </div>
+            </div>
+
+            <div class="bg-emerald-900 text-white rounded-xl p-5 shadow-md">
+                <div class="flex justify-between items-center mb-4">
+                    <div>
+                        <span class="text-xs font-bold text-emerald-300 uppercase tracking-wide">Check Understanding</span>
+                        <h3 class="text-lg font-bold">Participle Clauses Quiz</h3>
+                    </div>
+                    <span id="quiz-participle-status" class="text-xs bg-emerald-800 text-emerald-200 px-2.5 py-1 rounded-full font-bold">3 Questions</span>
+                </div>
+                <div id="quiz-participle-container" class="space-y-4"></div>
+            </div>
+
+            <!-- Pro Tip Box -->
+            <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-xl flex items-start space-x-3">
+                <div class="text-amber-600 font-bold text-lg">⚠️</div>
+                <div class="text-xs sm:text-sm text-amber-900 leading-relaxed">
+                    <strong>Beware of Dangling Participles:</strong> Always ensure the main subject performs the action in the participle clause!<br>
+                    ❌ <em>Dangling:</em> Walking down the street, a tree branch fell on me. (The branch wasn't walking!)<br>
+                    ✅ <em>Correct:</em> Walking down the street, I was hit by a falling tree branch.
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ========================================== -->
+        <!-- TAB 3: NOUN CLAUSES SECTION               -->
+        <!-- ========================================== -->
+        <section id="section-noun" class="tab-content hidden space-y-6 animate-pop">
+            <div class="bg-gradient-to-r from-amber-600 to-amber-800 rounded-2xl p-6 text-white shadow-lg">
+                <div class="flex items-center space-x-2 text-amber-200 text-xs font-bold tracking-wider uppercase mb-1">
+                    <span>Unit 03</span> • <span>Clause Functions</span>
+                </div>
+                <h2 class="text-2xl sm:text-3xl font-extrabold mb-2">Noun Clauses</h2>
+                <p class="text-amber-100 text-sm sm:text-base max-w-2xl leading-relaxed">
+                    A noun clause is a dependent clause that acts as a single noun. It can serve as a subject, direct object, or subject complement in a sentence.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-white rounded-xl p-5 border border-slate-200 shadow-sm">
+                    <h3 class="text-base font-bold text-amber-900 mb-3 flex items-center">
+                        <svg class="w-5 h-5 mr-2 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 002 2v12a2 2 0 002 2z"></path></svg>
+                        What triggers a Noun Clause?
+                    </h3>
+                    <p class="text-sm text-slate-600 leading-relaxed mb-3">
+                        Noun clauses usually begin with words like <strong>that, whether, if</strong>, or wh-words (<strong>what, how, why, where, who</strong>).
+                    </p>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        If you can replace the entire clause with the pronoun <em>"it"</em> or <em>"something"</em>, it is almost certainly a noun clause!
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-xl p-5 border border-slate-200 shadow-sm">
+                    <h3 class="text-base font-bold text-amber-900 mb-3 flex items-center">
+                        <svg class="w-5 h-5 mr-2 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+                        Grammatical Functions
+                    </h3>
+                    <ul class="text-xs sm:text-sm text-slate-600 space-y-2">
+                        <li class="flex items-start">
+                            <span class="inline-block w-2 h-2 rounded-full bg-amber-500 mt-1.5 mr-2 shrink-0"></span>
+                            <span><strong>Subject (Main Idea):</strong> <em><u>What you said</u> made everyone rethink the strategy.</em></span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="inline-block w-2 h-2 rounded-full bg-amber-500 mt-1.5 mr-2 shrink-0"></span>
+                            <span><strong>Direct Object (After Action Verb):</strong> <em>I wonder <u>if the test will be rescheduled</u>.</em></span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="inline-block w-2 h-2 rounded-full bg-amber-500 mt-1.5 mr-2 shrink-0"></span>
+                            <span><strong>Sentence Completion (After 'is' / 'was'):</strong> <em>The truth is <u>that we need more practice</u>.</em></span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl p-5 border border-slate-200 shadow-sm">
+                <h3 class="text-base font-bold text-slate-900 mb-3">Sentence Showcase</h3>
+                <div class="space-y-3">
+                    <div class="p-3 bg-slate-50 rounded-lg border border-slate-100 text-sm">
+                        <span class="font-semibold text-xs text-amber-600 block uppercase mb-1">1. That-Clause (Object)</span>
+                        The principal announced <span class="bg-amber-100 text-amber-900 px-1.5 py-0.5 rounded font-medium border border-amber-200">that modern laptops would be assigned to all seniors</span>.
+                    </div>
+                    <div class="p-3 bg-slate-50 rounded-lg border border-slate-100 text-sm">
+                        <span class="font-semibold text-xs text-amber-600 block uppercase mb-1">2. Wh-Clause (Subject Position)</span>
+                        <span class="bg-amber-100 text-amber-900 px-1.5 py-0.5 rounded font-medium border border-amber-200">Whatever you decide to present</span> will be supported by the group.
+                    </div>
+                    <div class="p-3 bg-slate-50 rounded-lg border border-slate-100 text-sm">
+                        <span class="font-semibold text-xs text-amber-600 block uppercase mb-1">3. If/Whether-Clause (Embedded Question)</span>
+                        The coach asked <span class="bg-amber-100 text-amber-900 px-1.5 py-0.5 rounded font-medium border border-amber-200">whether we were ready for the final match</span>.
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl p-5 border border-slate-200 shadow-sm space-y-6">
+                <div class="border-b border-slate-100 pb-3">
+                    <h3 class="text-base font-bold text-slate-900">Interactive Skill Builders</h3>
+                    <p class="text-xs text-slate-500">Test noun clause functions, word order, and indirect speech transformations.</p>
+                </div>
+
+                <!-- Activity A: Function ID -->
+                <div class="space-y-3">
+                    <label class="block text-sm font-semibold text-slate-800">
+                        Activity A: What function does the highlighted clause serve? <br>
+                        "<span class="bg-amber-100 text-amber-900 font-bold px-1 rounded">What the teacher explained</span> helped us pass the physics exam."
+                    </label>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2" id="noun-act1-options">
+                        <button onclick="checkNounAct1('Subject', this)" class="touch-target p-2.5 bg-slate-100 hover:bg-slate-200 font-semibold rounded-lg text-xs sm:text-sm text-slate-700 transition">Subject (At start)</button>
+                        <button onclick="checkNounAct1('Object', this)" class="touch-target p-2.5 bg-slate-100 hover:bg-slate-200 font-semibold rounded-lg text-xs sm:text-sm text-slate-700 transition">Direct Object (After verb)</button>
+                        <button onclick="checkNounAct1('Completion', this)" class="touch-target p-2.5 bg-slate-100 hover:bg-slate-200 font-semibold rounded-lg text-xs sm:text-sm text-slate-700 transition">Sentence Completion (After 'is')</button>
+                    </div>
+                    <div id="noun-act1-feedback" class="hidden p-3 rounded-lg text-xs sm:text-sm font-medium"></div>
+                </div>
+
+                <!-- Activity B: Word Order -->
+                <div class="space-y-3 pt-3 border-t border-slate-100">
+                    <label class="block text-sm font-semibold text-slate-800">
+                        Activity B: Choose the correct word order inside the embedded noun clause.
+                    </label>
+                    <p class="text-sm bg-amber-50/60 p-3 rounded-lg border border-amber-100">
+                        "Do you know <span class="underline font-bold text-amber-700">[ ? ]</span>?"
+                    </p>
+                    <div class="space-y-2" id="noun-act2-options">
+                        <button onclick="checkNounAct2(0, this)" class="touch-target w-full text-left p-3 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-lg text-xs sm:text-sm text-slate-700 transition">
+                            where did the counselor go
+                        </button>
+                        <button onclick="checkNounAct2(1, this)" class="touch-target w-full text-left p-3 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-lg text-xs sm:text-sm text-slate-700 transition">
+                            where the counselor went
+                        </button>
+                    </div>
+                    <div id="noun-act2-feedback" class="hidden p-3 rounded-lg text-xs sm:text-sm font-medium"></div>
+                </div>
+
+                <!-- Activity C: Indirect Speech Transformation -->
+                <div class="space-y-3 pt-3 border-t border-slate-100">
+                    <label class="block text-sm font-semibold text-slate-800">
+                        Activity C: Transform Direct Speech to Indirect Noun Clause. <br>
+                        Direct: <em>"The counselor asked, 'Is the exam room open?'"</em>
+                    </label>
+                    <div class="space-y-2" id="noun-act3-options">
+                        <button onclick="checkNounTransform(0, this)" class="touch-target w-full text-left p-3 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-lg text-xs sm:text-sm text-slate-700 transition">
+                            The counselor asked if the exam room was open.
+                        </button>
+                        <button onclick="checkNounTransform(1, this)" class="touch-target w-full text-left p-3 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-lg text-xs sm:text-sm text-slate-700 transition">
+                            The counselor asked that is the exam room open.
+                        </button>
+                    </div>
+                    <div id="noun-act3-feedback" class="hidden p-3 rounded-lg text-xs sm:text-sm font-medium"></div>
+                </div>
+            </div>
+
+            <div class="bg-amber-900 text-white rounded-xl p-5 shadow-md">
+                <div class="flex justify-between items-center mb-4">
+                    <div>
+                        <span class="text-xs font-bold text-amber-300 uppercase tracking-wide">Check Understanding</span>
+                        <h3 class="text-lg font-bold">Noun Clauses Quiz</h3>
+                    </div>
+                    <span id="quiz-noun-status" class="text-xs bg-amber-800 text-amber-200 px-2.5 py-1 rounded-full font-bold">3 Questions</span>
+                </div>
+                <div id="quiz-noun-container" class="space-y-4"></div>
+            </div>
+
+            <!-- Pro Tip Box -->
+            <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-xl flex items-start space-x-3">
+                <div class="text-amber-600 font-bold text-lg">💡</div>
+                <div class="text-xs sm:text-sm text-amber-900 leading-relaxed">
+                    <strong>Critical Rule - Statement Word Order:</strong> Noun clauses inside sentences use standard subject-verb order, NOT question word order!<br>
+                    ❌ <em>Incorrect:</em> I don't know where is the room.<br>
+                    ✅ <em>Correct:</em> I don't know where the room is.
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ========================================== -->
+        <!-- TAB 4: FINAL REVIEW CHALLENGE              -->
+        <!-- ========================================== -->
+        <section id="section-review" class="tab-content hidden space-y-6 animate-pop">
+            <div class="bg-gradient-to-r from-violet-700 to-purple-900 rounded-2xl p-6 text-white shadow-lg">
+                <div class="flex items-center space-x-2 text-violet-200 text-xs font-bold tracking-wider uppercase mb-1">
+                    <span>Cumulative Evaluation</span> • <span>Grade 10–12 Level</span>
+                </div>
+                <h2 class="text-2xl sm:text-3xl font-extrabold mb-2">Final Mastery Challenge</h2>
+                <p class="text-violet-100 text-sm sm:text-base max-w-2xl leading-relaxed">
+                    Test your mastery across all three grammar topics: Relative Clauses, Participle Clauses, and Noun Clauses. Complete all 10 questions to earn your mastery score!
+                </p>
+            </div>
+
+            <div class="bg-white rounded-xl p-5 border border-slate-200 shadow-sm space-y-6">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                    <div>
+                        <span id="final-progress-label" class="text-xs font-bold text-violet-600 uppercase">Question 1 of 10</span>
+                        <h3 class="text-lg font-bold text-slate-900">Comprehensive Check</h3>
+                    </div>
+                    <div class="text-right">
+                        <span id="final-score-counter" class="text-xl font-black text-violet-700">0 / 10</span>
+                        <span class="text-xs text-slate-400 block font-medium">Score</span>
+                    </div>
+                </div>
+
+                <!-- Final Quiz Question Area -->
+                <div id="final-quiz-body" class="space-y-4">
+                    <!-- Dynamic rendering in JS -->
+                </div>
+
+                <!-- Controls -->
+                <div id="final-controls" class="flex justify-between items-center pt-4 border-t border-slate-100 hidden">
+                    <button id="final-prev-btn" onclick="prevFinalQuestion()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-sm font-semibold transition">Previous</button>
+                    <button id="final-next-btn" onclick="nextFinalQuestion()" class="px-5 py-2 bg-violet-600 hover:bg-violet-700 text-white rounded-lg text-sm font-semibold transition shadow-sm">Next Question</button>
+                </div>
+            </div>
+
+            <div id="final-summary-card" class="hidden bg-white rounded-2xl p-6 border border-slate-200 text-center space-y-4 shadow-lg animate-pop">
+                <div class="w-16 h-16 bg-violet-100 text-violet-600 rounded-full flex items-center justify-center mx-auto text-2xl font-black">
+                    🏆
+                </div>
+                <h3 class="text-2xl font-extrabold text-slate-900">Challenge Completed!</h3>
+                <p id="final-summary-text" class="text-sm text-slate-600 max-w-md mx-auto">
+                    You scored 8 out of 10. Excellent understanding of high school clauses!
+                </p>
+                <div class="pt-2">
+                    <button onclick="restartFinalChallenge()" class="px-6 py-3 bg-violet-600 hover:bg-violet-700 text-white font-bold rounded-xl text-sm transition shadow-md">
+                        Retake Final Challenge
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Mobile Bottom Navigation Bar -->
+    <nav class="md:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-slate-200 z-40 px-2 py-1 shadow-lg">
+        <div class="grid grid-cols-4 gap-1 max-w-md mx-auto">
+            <button onclick="switchTab('relative')" id="mob-tab-relative" class="mob-nav-btn flex flex-col items-center justify-center py-2 text-slate-500 rounded-xl transition">
+                <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>
+                <span class="text-[10px] font-semibold">Relative</span>
+            </button>
+            <button onclick="switchTab('participle')" id="mob-tab-participle" class="mob-nav-btn flex flex-col items-center justify-center py-2 text-slate-500 rounded-xl transition">
+                <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                <span class="text-[10px] font-semibold">Participle</span>
+            </button>
+            <button onclick="switchTab('noun')" id="mob-tab-noun" class="mob-nav-btn flex flex-col items-center justify-center py-2 text-slate-500 rounded-xl transition">
+                <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 002 2v12a2 2 0 002 2z"></path></svg>
+                <span class="text-[10px] font-semibold">Noun</span>
+            </button>
+            <button onclick="switchTab('review')" id="mob-tab-review" class="mob-nav-btn flex flex-col items-center justify-center py-2 text-slate-500 rounded-xl transition">
+                <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path></svg>
+                <span class="text-[10px] font-semibold">Challenge</span>
+            </button>
+        </div>
+    </nav>
+
+
+    <script>
+        const state = {
+            currentTab: 'relative',
+            scores: {
+                relative: { correct: 0, total: 3 },
+                participle: { correct: 0, total: 3 },
+                noun: { correct: 0, total: 3 },
+                review: { correct: 0, total: 10 }
+            },
+            finalIndex: 0,
+            finalUserAnswers: Array(10).fill(null),
+            relHighlightSentence: ["The", "girl", "who", "won", "the", "essay", "contest", "received", "a", "scholarship."],
+            relHighlightCorrectIdx: [2, 3, 4, 5, 6], // "who won the essay contest"
+            selectedWords: []
+        };
+
+        const quizData = {
+            relative: [
+                {
+                    q: "Choose the correct pronoun: 'The school library, _____ was renovated last month, now features private study pods.'",
+                    options: ["that", "which", "where", "whose"],
+                    ans: 1,
+                    exp: "'Which' is used for non-defining clauses (inside commas). 'That' cannot be used after a comma."
+                },
+                {
+                    q: "In which sentence can the relative pronoun be OMITTED?",
+                    options: [
+                        "The teacher who assigned the essay was absent.",
+                        "The film that we saw yesterday was thrilling.",
+                        "A city that never sleeps is exciting."
+                    ],
+                    ans: 1,
+                    exp: "In option 2, 'that' is the object of 'saw' (we saw it), so it can be omitted."
+                },
+                {
+                    q: "Combine correctly: 'I talked to a girl. Her brother won the robotics championship.'",
+                    options: [
+                        "I talked to a girl who her brother won the robotics championship.",
+                        "I talked to a girl whose brother won the robotics championship.",
+                        "I talked to a girl that brother won the robotics championship."
+                    ],
+                    ans: 1,
+                    exp: "'Whose' indicates possession ('her brother')."
+                }
+            ],
+            participle: [
+                {
+                    q: "Complete the sentence: '_____ by the loud thunder, the puppy ran under the couch.'",
+                    options: ["Frightening", "Frightened", "Having frightened"],
+                    ans: 1,
+                    exp: "Use the past participle (-ed) for passive meaning (the puppy was frightened)."
+                },
+                {
+                    q: "Which sentence correctly uses a participle clause?",
+                    options: [
+                        "Walking down the street, my hat blew away.",
+                        "Walking down the street, I lost my hat.",
+                        "Having walk down the street, I lost my hat."
+                    ],
+                    ans: 1,
+                    exp: "Option 2 ensures the subject 'I' matches the action 'Walking'."
+                },
+                {
+                    q: "What does this sentence mean? 'Having completed the essay, Liam turned off his laptop.'",
+                    options: [
+                        "Liam wrote the essay while turning off his laptop.",
+                        "Liam turned off his laptop before completing the essay.",
+                        "Liam finished the essay FIRST, then turned off his laptop."
+                    ],
+                    ans: 2,
+                    exp: "'Having + past participle' expresses an action completed prior to the main clause."
+                }
+            ],
+            noun: [
+                {
+                    q: "Identify the function of the underlined clause: 'The problem is <u>that we ran out of time</u>.'",
+                    options: ["Subject (At start)", "Direct Object (After action verb)", "Sentence Completion (After 'is/was')"],
+                    ans: 2,
+                    optExps: [
+                        "Incorrect. The clause comes after 'is', not at the beginning of the sentence, so it is not acting as the Subject.",
+                        "Incorrect. 'Is' is a linking verb rather than an action verb, so this clause is not a Direct Object.",
+                        "Correct! It follows the linking verb 'is' to complete the sentence by describing what 'the problem' is."
+                    ],
+                    exp: "It follows 'is' to complete the sentence by describing what 'the problem' is."
+                },
+                {
+                    q: "Select the grammatically correct noun clause:",
+                    options: [
+                        "I wonder what time does the train arrive.",
+                        "I wonder what time the train arrives.",
+                        "I wonder what time arrives the train."
+                    ],
+                    ans: 1,
+                    optExps: [
+                        "Incorrect. 'what time does the train arrive' incorrectly uses question word order with auxiliary 'does'. Noun clauses must use statement order (Subject + Verb).",
+                        "Correct! Noun clauses embedded inside sentences must use statement word order (Subject + Verb: 'the train arrives').",
+                        "Incorrect. 'arrives the train' places the verb before the subject. Noun clauses require standard Subject + Verb order ('the train arrives')."
+                    ],
+                    exp: "Noun clauses must use statement word order (subject + verb), not question order."
+                },
+                {
+                    q: "Transform to indirect speech: She asked, 'Is the museum open?'",
+                    options: [
+                        "She asked if the museum was open.",
+                        "She asked that the museum is open.",
+                        "She asked was the museum open."
+                    ],
+                    ans: 0,
+                    optExps: [
+                        "Correct! Yes/No questions convert into noun clauses starting with 'if' or 'whether' with backshifted tense.",
+                        "Incorrect. 'that' cannot be used to introduce indirect question clauses. Use 'if' or 'whether'.",
+                        "Incorrect. 'was the museum open' keeps question word order. Noun clauses require statement word order ('if the museum was open')."
+                    ],
+                    exp: "Yes/No questions convert into noun clauses starting with 'if' or 'whether'."
+                }
+            ]
+        };
+
+        const finalQuizData = [
+            {
+                topic: "Relative Clause",
+                q: "The scientist _____ discovery changed medicine received the Nobel Prize.",
+                options: ["who", "whose", "which", "that"],
+                ans: 1,
+                exp: "'Whose' shows possession ('her/his discovery')."
+            },
+            {
+                topic: "Participle Clause",
+                q: "_____ the exam results, the student smiled with relief.",
+                options: ["Seeing", "Seen", "Having seen by"],
+                ans: 0,
+                exp: "Present participle 'Seeing' shows an active, continuous action."
+            },
+            {
+                topic: "Noun Clause",
+                q: "_____ you decide to study in college is your own personal choice.",
+                options: ["What", "That", "Which", "Where"],
+                ans: 0,
+                exp: "'What you decide to study' serves as the subject of the sentence."
+            },
+            {
+                topic: "Relative Clause",
+                q: "Identify the non-defining relative clause error:",
+                options: [
+                    "My mother, who is an engineer, loves math.",
+                    "Tokyo, that has millions of residents, is safe.",
+                    "The book that I borrowed was great."
+                ],
+                ans: 1,
+                exp: "'That' can never be used in non-defining clauses (inside commas)."
+            },
+            {
+                topic: "Participle Clause",
+                q: "Choose the passive participle clause:",
+                options: [
+                    "Written in 1954, the novel remains a classic.",
+                    "Writing in 1954, the novel remains a classic.",
+                    "Having written in 1954, the novel remains a classic."
+                ],
+                ans: 0,
+                exp: "'Written' is the past participle used for passive meaning ('The novel was written...')."
+            },
+            {
+                topic: "Noun Clause",
+                q: "Which sentence has correct word order?",
+                options: [
+                    "Can you tell me where is the auditorium?",
+                    "Can you tell me where the auditorium is?",
+                    "Can you tell me where does the auditorium be?"
+                ],
+                ans: 1,
+                exp: "Noun clauses embedded inside questions require statement order (subject + verb)."
+            },
+            {
+                topic: "Relative Clause",
+                q: "In which sentence can the relative pronoun 'who' or 'that' NOT be omitted?",
+                options: [
+                    "The mentor who guided me was very patient.",
+                    "The course that I chose was challenging.",
+                    "The advice that she gave was helpful."
+                ],
+                ans: 0,
+                exp: "In option 1, 'who' is the SUBJECT of 'guided', so it cannot be omitted."
+            },
+            {
+                topic: "Participle Clause",
+                q: "Fix the error: 'Having eaten breakfast, the train was boarded by Mark.'",
+                options: [
+                    "Having eaten breakfast, Mark boarded the train.",
+                    "Eating breakfast, the train took Mark away.",
+                    "Eaten breakfast, Mark boarded the train."
+                ],
+                ans: 0,
+                exp: "Ensures the subject 'Mark' directly follows the participle clause."
+            },
+            {
+                topic: "Noun Clause",
+                q: "What role does the clause play? 'We know that practice makes perfect.'",
+                options: ["Subject (At start)", "Direct Object (After verb)", "Sentence Completion (After 'is')"],
+                ans: 1,
+                exp: "It answers 'What do we know?' as the direct object following the verb 'know'."
+            },
+            {
+                topic: "Relative Clause",
+                q: "Select the correct combination: 'This is the studio. We recorded our album here.'",
+                options: [
+                    "This is the studio where we recorded our album.",
+                    "This is the studio which we recorded our album here.",
+                    "This is the studio when we recorded our album."
+                ],
+                ans: 0,
+                exp: "'Where' replaces 'here' and must be followed by the complete sentence 'we recorded our album'."
+            }
+        ];
+
+        function switchTab(tabKey) {
+            state.currentTab = tabKey;
+
+            // Hide all sections
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            
+            // Show current section
+            const activeSec = document.getElementById(`section-${tabKey}`);
+            if(activeSec) activeSec.classList.remove('hidden');
+
+            // Update Desktop Tab Styling
+            document.querySelectorAll('.nav-tab').forEach(btn => {
+                btn.className = "nav-tab text-sm font-semibold px-4 py-2 rounded-lg transition-all flex items-center space-x-2 text-slate-600 hover:bg-slate-200/60";
+            });
+            const activeDeskBtn = document.getElementById(`desk-tab-${tabKey}`);
+            if (activeDeskBtn) {
+                activeDeskBtn.className = "nav-tab text-sm font-semibold px-4 py-2 rounded-lg transition-all flex items-center space-x-2 bg-indigo-600 text-white shadow-sm";
+            }
+
+            // Update Mobile Nav Styling
+            document.querySelectorAll('.mob-nav-btn').forEach(btn => {
+                btn.classList.remove('text-indigo-600', 'bg-indigo-50');
+                btn.classList.add('text-slate-500');
+            });
+            const activeMobBtn = document.getElementById(`mob-tab-${tabKey}`);
+            if (activeMobBtn) {
+                activeMobBtn.classList.remove('text-slate-500');
+                activeMobBtn.classList.add('text-indigo-600', 'bg-indigo-50');
+            }
+
+            // Smooth scroll top on tab change
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function renderRelHighlightBox() {
+            const container = document.getElementById('rel-highlight-box');
+            if(!container) return;
+            container.innerHTML = '';
+
+            state.relHighlightSentence.forEach((word, idx) => {
+                const chip = document.createElement('span');
+                chip.className = `word-chip ${state.selectedWords.includes(idx) ? 'selected' : ''}`;
+                chip.innerText = word;
+                chip.onclick = () => toggleWordSelection(idx);
+                container.appendChild(chip);
+            });
+        }
+
+        function toggleWordSelection(idx) {
+            if(state.selectedWords.includes(idx)) {
+                state.selectedWords = state.selectedWords.filter(i => i !== idx);
+            } else {
+                state.selectedWords.push(idx);
+            }
+            renderRelHighlightBox();
+        }
+
+        function checkRelHighlight() {
+            const feedback = document.getElementById('rel-hl-feedback');
+            feedback.classList.remove('hidden');
+
+            const sortedUser = [...state.selectedWords].sort((a,b) => a-b);
+            const sortedTarget = [...state.relHighlightCorrectIdx].sort((a,b) => a-b);
+
+            const isExact = JSON.stringify(sortedUser) === JSON.stringify(sortedTarget);
+
+            if(isExact) {
+                feedback.className = "p-3 rounded-lg text-xs sm:text-sm font-medium bg-emerald-100 text-emerald-800 border border-emerald-200";
+                feedback.innerHTML = " Spot on! 'who won the essay contest' is the complete relative clause defining 'The girl'.";
+            } else {
+                feedback.className = "p-3 rounded-lg text-xs sm:text-sm font-medium bg-rose-100 text-rose-800 border border-rose-200";
+                feedback.innerHTML = " Not quite. Make sure to tap all words in the relative clause: 'who won the essay contest'.";
+            }
+        }
+
+        function resetRelHighlight() {
+            state.selectedWords = [];
+            renderRelHighlightBox();
+            document.getElementById('rel-hl-feedback').classList.add('hidden');
+        }
+
+        function checkRelAct1(chosen, btn) {
+            const feedback = document.getElementById('rel-act1-feedback');
+            feedback.classList.remove('hidden');
+            
+            if (chosen === 'who') {
+                btn.className = "touch-target px-4 py-2 bg-emerald-600 text-white font-bold rounded-lg text-sm transition shadow-sm";
+                feedback.className = "p-3 rounded-lg text-xs sm:text-sm font-medium bg-emerald-100 text-emerald-800 border border-emerald-200";
+                feedback.innerHTML = " Correct! 'Who' refers to the doctor (a person) in subject position.";
+            } else {
+                btn.className = "touch-target px-4 py-2 bg-rose-600 text-white font-bold rounded-lg text-sm transition";
+                feedback.className = "p-3 rounded-lg text-xs sm:text-sm font-medium bg-rose-100 text-rose-800 border border-rose-200";
+                feedback.innerHTML = " Not quite. The doctor is a person performing the action, so use 'who'.";
+            }
+        }
+
+        function checkRelCombine(index, btn) {
+            const feedback = document.getElementById('rel-act3-feedback');
+            feedback.classList.remove('hidden');
+
+            if (index === 1) {
+                btn.className = "touch-target w-full text-left p-3 bg-emerald-600 text-white font-bold rounded-lg text-xs sm:text-sm transition shadow-sm";
+                feedback.className = "p-3 rounded-lg text-xs sm:text-sm font-medium bg-emerald-100 text-emerald-800 border border-emerald-200";
+                feedback.innerHTML = " Excellent! 'that was published in 1925' seamlessly replaces 'It was published...' without unnecessary commas.";
+            } else {
+                btn.className = "touch-target w-full text-left p-3 bg-rose-600 text-white font-bold rounded-lg text-xs sm:text-sm transition";
+                feedback.className = "p-3 rounded-lg text-xs sm:text-sm font-medium bg-rose-100 text-rose-800 border border-rose-200";
+                feedback.innerHTML = " Incorrect. Remember that 'that' shouldn't follow a comma in restrictive clauses, and 'where' is for places.";
+            }
+        }
+
+        function checkPartAct1(index, btn) {
+            const feedback = document.getElementById('part-act1-feedback');
+            feedback.classList.remove('hidden');
+
+            if (index === 1) {
+                btn.className = "touch-target w-full text-left p-3 bg-emerald-600 text-white font-bold rounded-lg text-xs sm:text-sm transition shadow-sm";
+                feedback.className = "p-3 rounded-lg text-xs sm:text-sm font-medium bg-emerald-100 text-emerald-800 border border-emerald-200";
+                feedback.innerHTML = " Correct! 'Exhausted' is a past participle used because Sarah was feeling exhausted (passive state).";
+            } else {
+                btn.className = "touch-target w-full text-left p-3 bg-rose-600 text-white font-bold rounded-lg text-xs sm:text-sm transition";
+                feedback.className = "p-3 rounded-lg text-xs sm:text-sm font-medium bg-rose-100 text-rose-800 border border-rose-200";
+                feedback.innerHTML = " Incorrect. 'Exhausting' means causing exhaustion to others. Sarah herself was 'Exhausted'.";
+            }
+        }
+
+        function checkPartAct2(choice, btn) {
+            const feedback = document.getElementById('part-act2-feedback');
+            feedback.classList.remove('hidden');
+
+            if (choice === 'having completed') {
+                btn.className = "touch-target p-2.5 bg-emerald-600 text-white font-bold rounded-lg text-xs sm:text-sm transition shadow-sm";
+                feedback.className = "p-3 rounded-lg text-xs sm:text-sm font-medium bg-emerald-100 text-emerald-800 border border-emerald-200";
+                feedback.innerHTML = " Spot on! 'Having completed' shows the requirements were completed BEFORE scheduling the interview.";
+            } else {
+                btn.className = "touch-target p-2.5 bg-rose-600 text-white font-bold rounded-lg text-xs sm:text-sm transition";
+                feedback.className = "p-3 rounded-lg text-xs sm:text-sm font-medium bg-rose-100 text-rose-800 border border-rose-200";
+                feedback.innerHTML = " Not quite. Use the perfect participle 'Having completed' to emphasize prior completion.";
+            }
+        }
+
+        function checkPartMeaning(type, btn) {
+            const feedback = document.getElementById('part-act3-feedback');
+            feedback.classList.remove('hidden');
+
+            if (type === 'cause') {
+                btn.className = "touch-target p-2.5 bg-emerald-600 text-white font-bold rounded-lg text-xs sm:text-sm transition shadow-sm";
+                feedback.className = "p-3 rounded-lg text-xs sm:text-sm font-medium bg-emerald-100 text-emerald-800 border border-emerald-200";
+                feedback.innerHTML = " Correct! It means 'BECAUSE David did not know the answer, he remained silent.'";
+            } else {
+                btn.className = "touch-target p-2.5 bg-rose-600 text-white font-bold rounded-lg text-xs sm:text-sm transition";
+                feedback.className = "p-3 rounded-lg text-xs sm:text-sm font-medium bg-rose-100 text-rose-800 border border-rose-200";
+                feedback.innerHTML = " Try again. The participle clause explains the reason why David stayed silent.";
+            }
+        }
+
+        function checkNounAct1(type, btn) {
+            const feedback = document.getElementById('noun-act1-feedback');
+            feedback.classList.remove('hidden');
+
+            if (type === 'Subject') {
+                btn.className = "touch-target p-2.5 bg-emerald-600 text-white font-bold rounded-lg text-xs sm:text-sm transition shadow-sm";
+                feedback.className = "p-3 rounded-lg text-xs sm:text-sm font-medium bg-emerald-100 text-emerald-800 border border-emerald-200";
+                feedback.innerHTML = " Correct! 'What the teacher explained' is the entire Subject of the verb 'helped'.";
+            } else {
+                btn.className = "touch-target p-2.5 bg-rose-600 text-white font-bold rounded-lg text-xs sm:text-sm transition";
+                feedback.className = "p-3 rounded-lg text-xs sm:text-sm font-medium bg-rose-100 text-rose-800 border border-rose-200";
+                feedback.innerHTML = " Incorrect. Look at the position before the main verb 'helped'. It functions as the Subject.";
+            }
+        }
+
+        function checkNounAct2(idx, btn) {
+            const feedback = document.getElementById('noun-act2-feedback');
+            feedback.classList.remove('hidden');
+
+            if (idx === 1) {
+                btn.className = "touch-target w-full text-left p-3 bg-emerald-600 text-white font-bold rounded-lg text-xs sm:text-sm transition shadow-sm";
+                feedback.className = "p-3 rounded-lg text-xs sm:text-sm font-medium bg-emerald-100 text-emerald-800 border border-emerald-200";
+                feedback.innerHTML = " Perfect! Statement word order: [where] + [the counselor (S)] + [went (V)].";
+            } else {
+                btn.className = "touch-target w-full text-left p-3 bg-rose-600 text-white font-bold rounded-lg text-xs sm:text-sm transition";
+                feedback.className = "p-3 rounded-lg text-xs sm:text-sm font-medium bg-rose-100 text-rose-800 border border-rose-200";
+                feedback.innerHTML = " Incorrect. Do not use auxiliary 'did' in embedded noun clauses!";
+            }
+        }
+
+        function checkNounTransform(idx, btn) {
+            const feedback = document.getElementById('noun-act3-feedback');
+            feedback.classList.remove('hidden');
+
+            if (idx === 0) {
+                btn.className = "touch-target w-full text-left p-3 bg-emerald-600 text-white font-bold rounded-lg text-xs sm:text-sm transition shadow-sm";
+                feedback.className = "p-3 rounded-lg text-xs sm:text-sm font-medium bg-emerald-100 text-emerald-800 border border-emerald-200";
+                feedback.innerHTML = " Excellent! Yes/No questions convert to noun clauses using 'if' or 'whether' with backshifted tense.";
+            } else {
+                btn.className = "touch-target w-full text-left p-3 bg-rose-600 text-white font-bold rounded-lg text-xs sm:text-sm transition";
+                feedback.className = "p-3 rounded-lg text-xs sm:text-sm font-medium bg-rose-100 text-rose-800 border border-rose-200";
+                feedback.innerHTML = " Incorrect. Do not use 'that' to introduce a question transformation!";
+            }
+        }
+
+        function renderSectionQuiz(topicKey) {
+            const container = document.getElementById(`quiz-${topicKey}-container`);
+            if (!container) return;
+
+            const questions = quizData[topicKey];
+            container.innerHTML = '';
+
+            questions.forEach((qObj, qIdx) => {
+                const qDiv = document.createElement('div');
+                qDiv.className = "bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/10 space-y-3";
+
+                let optionsHTML = qObj.options.map((opt, oIdx) => `
+                    <button onclick="handleSectionQuizAns('${topicKey}', ${qIdx}, ${oIdx}, this)" 
+                            class="touch-target w-full text-left p-2.5 bg-white/10 hover:bg-white/20 text-white rounded-lg text-xs sm:text-sm font-medium transition border border-white/5">
+                        ${opt}
+                    </button>
+                `).join('');
+
+                qDiv.innerHTML = `
+                    <p class="text-sm font-semibold text-white leading-snug">${qIdx + 1}. ${qObj.q}</p>
+                    <div class="space-y-2">${optionsHTML}</div>
+                    <div id="quiz-${topicKey}-fb-${qIdx}" class="hidden p-2.5 rounded-lg text-xs font-medium"></div>
+                `;
+                container.appendChild(qDiv);
+            });
+        }
+
+        function handleSectionQuizAns(topicKey, qIdx, chosenIdx, btn) {
+            const qObj = quizData[topicKey][qIdx];
+            const fbDiv = document.getElementById(`quiz-${topicKey}-fb-${qIdx}`);
+            fbDiv.classList.remove('hidden');
+
+            // Track first attempt for score calculation
+            if (qObj.answered === undefined) {
+                qObj.answered = true;
+                qObj.firstAttemptCorrect = (chosenIdx === qObj.ans);
+                if (qObj.firstAttemptCorrect) {
+                    state.scores[topicKey].correct = Math.min(state.scores[topicKey].total, state.scores[topicKey].correct + 1);
+                }
+            }
+
+            const parent = btn.parentElement;
+            const buttons = parent.querySelectorAll('button');
+
+            // Reset option button styles and highlight the correct answer
+            buttons.forEach((b, idx) => {
+                b.className = "touch-target w-full text-left p-2.5 rounded-lg text-xs sm:text-sm font-medium transition border border-white/10 bg-white/10 hover:bg-white/20 text-white";
+                if (idx === qObj.ans) {
+                    b.classList.remove('bg-white/10');
+                    b.classList.add('bg-emerald-600/80', 'text-white', 'font-semibold', 'border-emerald-400');
+                }
+            });
+
+            // Retrieve option-specific and correct answer explanations
+            const chosenExp = (qObj.optExps && qObj.optExps[chosenIdx]) ? qObj.optExps[chosenIdx] : qObj.exp;
+            const correctExp = (qObj.optExps && qObj.optExps[qObj.ans]) ? qObj.optExps[qObj.ans] : qObj.exp;
+
+            if (chosenIdx === qObj.ans) {
+                // Correct answer selected
+                btn.classList.remove('bg-white/10', 'bg-emerald-600/80');
+                btn.classList.add('bg-emerald-600', 'text-white', 'font-bold', 'ring-2', 'ring-emerald-300');
+                
+                fbDiv.className = "p-3 rounded-lg text-xs sm:text-sm font-medium bg-emerald-500/20 text-emerald-100 border border-emerald-400/40 animate-pop";
+                fbDiv.innerHTML = `✓ ${correctExp}`;
+            } else {
+                // Incorrect answer selected
+                btn.classList.remove('bg-white/10');
+                btn.classList.add('bg-rose-600', 'text-white', 'font-bold', 'border-2', 'border-rose-300');
+
+                fbDiv.className = "p-3 rounded-lg text-xs sm:text-sm font-medium bg-rose-900/90 text-rose-100 border-2 border-rose-500 shadow-md animate-pop";
+                fbDiv.innerHTML = `
+                    <div class="mb-1.5">❌ <strong>Your Selection:</strong> ${chosenExp}</div>
+                    <div class="pt-1.5 border-t border-rose-700/60 text-emerald-200">💡 <strong>Correct Answer Explanation:</strong> ${correctExp}</div>
+                `;
+            }
+
+            updateGlobalProgress();
+        }
+
+        function renderFinalQuestion() {
+            const qObj = finalQuizData[state.finalIndex];
+            const body = document.getElementById('final-quiz-body');
+            const progressLabel = document.getElementById('final-progress-label');
+            const scoreCounter = document.getElementById('final-score-counter');
+            const controls = document.getElementById('final-controls');
+
+            controls.classList.remove('hidden');
+            progressLabel.innerText = `Question ${state.finalIndex + 1} of 10 • ${qObj.topic}`;
+            scoreCounter.innerText = `${state.scores.review.correct} / 10`;
+
+            const userAns = state.finalUserAnswers[state.finalIndex];
+
+            let optionsHTML = qObj.options.map((opt, oIdx) => {
+                let btnStyle = "bg-slate-50 border-slate-200 hover:bg-slate-100 text-slate-700";
+                if (userAns !== null) {
+                    if (oIdx === qObj.ans) btnStyle = "bg-emerald-600 text-white border-emerald-600 font-bold";
+                    else if (oIdx === userAns) btnStyle = "bg-rose-600 text-white border-rose-600 font-bold";
+                    else btnStyle = "bg-slate-50 text-slate-400 border-slate-100";
+                }
+
+                return `
+                    <button onclick="handleFinalAnswer(${oIdx})" ${userAns !== null ? 'disabled' : ''} 
+                            class="touch-target w-full text-left p-3.5 border rounded-xl text-xs sm:text-sm font-medium transition ${btnStyle}">
+                        ${opt}
+                    </button>
+                `;
+            }).join('');
+
+            let feedbackHTML = '';
+            if (userAns !== null) {
+                const isCorrect = userAns === qObj.ans;
+                feedbackHTML = `
+                    <div class="p-3 rounded-xl text-xs sm:text-sm font-medium ${isCorrect ? 'bg-emerald-50 text-emerald-800 border border-emerald-200' : 'bg-rose-50 text-rose-800 border border-rose-200'}">
+                        ${isCorrect ? ' Correct!' : ' Incorrect.'} ${qObj.exp}
+                    </div>
+                `;
+            }
+
+            body.innerHTML = `
+                <div class="space-y-4">
+                    <p class="text-base sm:text-lg font-bold text-slate-800 leading-snug">${qObj.q}</p>
+                    <div class="space-y-2.5">${optionsHTML}</div>
+                    ${feedbackHTML}
+                </div>
+            `;
+
+            document.getElementById('final-prev-btn').style.visibility = state.finalIndex === 0 ? 'hidden' : 'visible';
+            const nextBtn = document.getElementById('final-next-btn');
+            nextBtn.innerText = state.finalIndex === 9 ? 'Finish Challenge' : 'Next Question';
+        }
+
+        function handleFinalAnswer(optionIndex) {
+            if (state.finalUserAnswers[state.finalIndex] !== null) return;
+
+            state.finalUserAnswers[state.finalIndex] = optionIndex;
+            if (optionIndex === finalQuizData[state.finalIndex].ans) {
+                state.scores.review.correct++;
+            }
+
+            updateGlobalProgress();
+            renderFinalQuestion();
+        }
+
+        function nextFinalQuestion() {
+            if (state.finalIndex < 9) {
+                state.finalIndex++;
+                renderFinalQuestion();
+            } else {
+                showFinalSummary();
+            }
+        }
+
+        function prevFinalQuestion() {
+            if (state.finalIndex > 0) {
+                state.finalIndex--;
+                renderFinalQuestion();
+            }
+        }
+
+        function showFinalSummary() {
+            document.getElementById('final-quiz-body').parentElement.classList.add('hidden');
+            const summary = document.getElementById('final-summary-card');
+            summary.classList.remove('hidden');
+
+            const score = state.scores.review.correct;
+            const pct = Math.round((score / 10) * 100);
+            
+            let gradeText = "Keep practicing! Review the units above to strengthen your grammar.";
+            if (pct >= 80) gradeText = "Outstanding! You have mastered Grade 10-12 advanced clause structures!";
+            else if (pct >= 60) gradeText = "Good effort! A little more practice with non-defining and participle clauses will make you unstoppable.";
+
+            document.getElementById('final-summary-text').innerHTML = `
+                You scored <span class="font-extrabold text-violet-700 text-lg">${score}/10</span> (${pct}%).<br>${gradeText}
+            `;
+        }
+
+        function restartFinalChallenge() {
+            state.finalIndex = 0;
+            state.scores.review.correct = 0;
+            state.finalUserAnswers = Array(10).fill(null);
+            
+            document.getElementById('final-summary-card').classList.add('hidden');
+            document.getElementById('final-quiz-body').parentElement.classList.remove('hidden');
+            renderFinalQuestion();
+            updateGlobalProgress();
+        }
+
+        function updateGlobalProgress() {
+            ['relative', 'participle', 'noun', 'review'].forEach(key => {
+                const badge = document.getElementById(`badge-${key}`);
+                if (badge) {
+                    badge.innerText = `${state.scores[key].correct}/${state.scores[key].total}`;
+                }
+            });
+        }
+
+        window.onload = function() {
+            renderRelHighlightBox();
+            renderSectionQuiz('relative');
+            renderSectionQuiz('participle');
+            renderSectionQuiz('noun');
+            renderFinalQuestion();
+            switchTab('relative');
+            updateGlobalProgress();
+        };
+    </script>
+</body>
+</html>
